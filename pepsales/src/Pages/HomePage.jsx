@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Box, Text, Flex, Center, SimpleGrid, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Flex,
+  Center,
+  SimpleGrid,
+  Button,
+  Spinner,
+} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyData } from "../Redux/CompanyReducer/acton";
 
@@ -14,9 +22,12 @@ const HomePage = () => {
 
   console.log(stocks, "stocks");
 
-  // Ensure stocks is not undefined before mapping
   if (!stocks || stocks.length === 0) {
-    return <div>Loading...</div>; // or any loading indicator
+    return (
+      <Flex justify="center" align="center" h="100vh">
+        <Spinner size="xl" thickness="4px" color="teal.500" />
+      </Flex>
+    );
   }
 
   const handleToggleDetails = (symbol1, symbol2) => {
