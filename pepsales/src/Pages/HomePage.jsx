@@ -1,52 +1,82 @@
-import React, { useState, useEffect } from "react";
-import { Box, Text, Flex, Center, VStack } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Box, Text, Flex, Center, SimpleGrid, Button } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCompanyData } from "../Redux/CompanyReducer/acton";
 
 const HomePage = () => {
-  const [stocks, setStocks] = useState([]);
+  const dispatch = useDispatch();
+  const stocks = useSelector((state) => state.stocks);
+  const [showDetails, setShowDetails] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://financialmodelingprep.com/api/v3/stock/list?apikey=kl5zJ1tpBMbwj9iCoQt0geHWQMJrtmpb"
-        );
-        const data = await response.json();
-        setStocks(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    dispatch(fetchCompanyData());
+  }, [dispatch]);
 
-    fetchData();
-  }, []);
+  console.log(stocks, "stocks");
 
-  console.log(stocks);
+  // Ensure stocks is not undefined before mapping
+  if (!stocks || stocks.length === 0) {
+    return <div>Loading...</div>; // or any loading indicator
+  }
+
+  const handleToggleDetails = (symbol1, symbol2) => {
+    setShowDetails((prevShowDetails) => ({
+      ...prevShowDetails,
+      [`${symbol1}-${symbol2}`]: !prevShowDetails[`${symbol1}-${symbol2}`],
+    }));
+  };
 
   return (
-    <Flex justify="center" align="center" h="100vh">
-      <VStack spacing={4}>
+    <Flex justify="center" align="center" p={4}>
+      <SimpleGrid columns={[1, 2, 3]} spacing={4} w="full">
         {stocks.map((stock, index) => (
           <Box
-            key={`${stock.symbol}-${index}`}
+            key={`${stock.symbol1}-${stock.symbol2}-${index}`}
             p={4}
-            maxW="sm"
             borderWidth="1px"
             borderRadius="lg"
             overflow="hidden"
             boxShadow="lg"
           >
             <Text fontSize="xl" fontWeight="bold">
-              {stock.name}
+              {stock.symbol1} / {stock.symbol2}
             </Text>
             <Text fontSize="md" color="gray.500">
-              {stock.symbol}
+              Min Price: {stock.minPrice || "N/A"}
+            </Text>
+            <Text fontSize="md" color="gray.500">
+              Max Price: {stock.maxPrice || "N/A"}
             </Text>
             <Center mt={2}>
-              <Text fontSize="2xl">${stock.price}</Text>
+              <Text fontSize="2xl">
+                Min Lot Size: {stock.minLotSize || "N/A"}
+              </Text>
             </Center>
+            <Button
+              mt={4}
+              colorScheme="teal"
+              onClick={() => handleToggleDetails(stock.symbol1, stock.symbol2)}
+            >
+              {showDetails[`${stock.symbol1}-${stock.symbol2}`]
+                ? "Hide Details"
+                : "More Details"}
+            </Button>
+            {showDetails[`${stock.symbol1}-${stock.symbol2}`] && (
+              <Box mt={4} p={2} borderWidth="1px" borderRadius="md">
+                <Text fontSize="md">
+                  Price Precision: {stock.pricePrecision || "N/A"}
+                </Text>
+                <Text fontSize="md">
+                  Min Lot Size S2: {stock.minLotSizeS2 || "N/A"}
+                </Text>
+                {stock.maxLotSize && (
+                  <Text fontSize="md">Max Lot Size: {stock.maxLotSize}</Text>
+                )}
+              </Box>
+            )}
           </Box>
         ))}
-      </VStack>
+      </SimpleGrid>
     </Flex>
   );
 };

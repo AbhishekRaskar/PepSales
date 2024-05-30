@@ -68,7 +68,7 @@ const Navbar = () => {
           <Button onClick={toggleColorMode} mr={4}>
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </Button>
-          <Button
+          {/* <Button
             as={RouterLink}
             to="/signup"
             display={{ base: "none", md: "inline-flex" }}
@@ -81,7 +81,7 @@ const Navbar = () => {
             }}
           >
             Sign Up
-          </Button>
+          </Button> */}
         </Flex>
       </Flex>
 
