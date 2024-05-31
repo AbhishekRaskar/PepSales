@@ -19,11 +19,14 @@ Start exploring the world of stocks with Stocker today!
 Feel free to adjust the language or add more details as needed to better fit your vision for the website!
 ### Screen Shots
 ## Dark Theme
-![Screenshot 2024-05-30 163310](https://github.com/AbhishekRaskar/PepSales/assets/112754426/6c09a6f0-bbed-4933-8f21-e635ae8e6612)
+![Screenshot 2024-05-31 141837](https://github.com/AbhishekRaskar/PepSales/assets/112754426/fd2272c5-11eb-41e2-b01a-fcf6b734f40d)
+
 ## Light Theme
-![Screenshot 2024-05-30 163321](https://github.com/AbhishekRaskar/PepSales/assets/112754426/71b598ab-02ab-4957-b828-ba4f977e9dec)
+![Screenshot 2024-05-31 141846](https://github.com/AbhishekRaskar/PepSales/assets/112754426/9fcfff6a-38e4-4f89-a87a-44641e564514)
+
 ## More Details
-![Screenshot 2024-05-30 163329](https://github.com/AbhishekRaskar/PepSales/assets/112754426/3e57eae0-90a3-4f5f-842d-b90ac900304a)
+![Screenshot 2024-05-31 141927](https://github.com/AbhishekRaskar/PepSales/assets/112754426/014b0da4-57ec-4940-8167-a1224ae81a54)
+
 
 
 
